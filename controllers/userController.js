@@ -47,7 +47,16 @@ const loginUser = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+const logoutUser = async (req, res) => {
+  try {
+    return res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    console.error("Error logging out user:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 module.exports = {
   createUser,
   loginUser,
+  logoutUser
 };
