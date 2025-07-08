@@ -1,4 +1,5 @@
 const { default: User } = require("../models/User");
+const { signToken } = require('../authentication/jwtToken');
 
 const createUser = async (req, res) => {
   try {
@@ -10,6 +11,9 @@ const createUser = async (req, res) => {
     }
     const newUser = new User(userData);
     const savedUser = await newUser.save();
+
+
+
     return res
       .status(201)
       .json({ message: "User created successfully", user: savedUser });
@@ -34,9 +38,10 @@ const loginUser = async (req, res) => {
     if (findUser.password !== password) {
       return res.status(401).json({ message: "invalid password" });
     }
+    const token = signToken(findUser);
     return res
       .status(200)
-      .json({ message: "login successful", user: { email: findUser.email , id: findUser._id ,role: findUser.role } });
+      .json({ message: "login successful", user: { email: findUser.email , id: findUser._id ,role: findUser.role }, token });
   } catch (error) {
     console.error("Error logging in user:", error);
     return res.status(500).json({ message: "Internal server error" });

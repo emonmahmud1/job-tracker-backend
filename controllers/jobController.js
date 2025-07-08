@@ -8,7 +8,7 @@ const postjob = async (req, res) => {
     const newjob = new Job(req.body);
     console.log(newjob);
     const savedJob = await newjob.save();
-    return res.status(201).json(savedJob);
+    return res.status(201).json({message: "Job posted successfully", job: savedJob});
   }catch(error){
     console.error("Error posting job:", error);
     return res.status(500).json({ message: "Internal server error" });

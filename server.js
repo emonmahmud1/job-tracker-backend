@@ -20,8 +20,9 @@ app.use(express.json());
 // create user routes
 const userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes); 
+
 const jobRoutes = require("./routes/jobRoutes");
-app.use("/api/jobs", jobRoutes); // Always mount routes outside DB connect
+app.use("/api/jobs", jobRoutes);
 
 // ✅ Connect to MongoDB using Mongoose
 mongoose
