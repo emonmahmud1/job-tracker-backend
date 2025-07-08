@@ -76,12 +76,12 @@ const deletejob = async (req, res) => {
 const modifyJob = async (req, res) => {
   try {
     const jobid = req.params.id;
-    console.log(jobid);
+    // console.log(jobid);
     const jobToUpdate = await Job.findById(jobid);
     if (!jobToUpdate) {
       return res.status(404).json({ message: "job not found to update" });
     }
-    console.log(jobToUpdate.postedBy.toString(), req.user.id);
+    // console.log(jobToUpdate.postedBy.toString(), req.user.id);
     if (jobToUpdate.postedBy.toString() !== req.user.id) {
       return res
         .status(403)
@@ -100,10 +100,28 @@ const modifyJob = async (req, res) => {
   }
 };
 
+const jobAddByUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const postedJobs = await Job.find({ postedBy: userId });
+    if (!postedJobs || postedJobs.length == 0) {
+      return res
+        .status(404)
+        .json({ message: "you have not posted any job yet" });
+    }
+    return res
+      .status(200)
+      .json({ message: "your posted jobs", jobs: postedJobs });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   allJobs,
   postjob,
   getJobById,
   deletejob,
   modifyJob,
+  jobAddByUser,
 };
