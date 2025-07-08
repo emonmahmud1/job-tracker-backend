@@ -17,10 +17,11 @@ app.use(express.json());
 // const applicationRoutes = require("./routes/applicationRoutes");
 // app.use("/api/applications", applicationRoutes);
 
-// create user routes
+// user routes
 const userRoutes = require("./routes/userRoutes");
-app.use("/api/users", userRoutes); 
+app.use("/api/user", userRoutes); 
 
+// job routes
 const jobRoutes = require("./routes/jobRoutes");
 app.use("/api/jobs", jobRoutes);
 

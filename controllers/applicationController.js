@@ -59,15 +59,15 @@ const getApplicationsByUser = async (req, res) => {
 };
 const getAllApplications = async (req, res) => {
   try {
-    if (!Application) {
-      return res.status(400).json({ message: "Application model not found" });
-    } else {
-      const applications = await Application.find().toArray();
-      return res.status(200).json(applications);
+    const applications = await Application.find();
+    if (!applications || applications.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No applications found. Apply Now" });
     }
-    // if (!applications || applications.length === 0) {
-    //     return res.status(404).json({ message: "No applications found" });
-    // }
+    return res
+      .status(200)
+      .json({ message: "Applications fetched successfully", applications });
   } catch (error) {
     console.error("Error fetching applications:", error);
     return res.status(500).json({ message: "Internal server error" });
