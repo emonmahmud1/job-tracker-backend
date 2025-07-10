@@ -69,8 +69,8 @@ const loginUser = async (req, res) => {
     if (!findUser) {
       return res.status(404).json({ message: "user not found" });
     }
-    if (findUser.password !== password) {
-      return res.status(401).json({ message: "invalid password" });
+    if (findUser.password !== password || findUser.email !== email) {
+      return res.status(401).json({ message: "invalid email or password" });
     }
     const token = signToken(findUser);
     return res

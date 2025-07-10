@@ -25,6 +25,9 @@ app.use("/api/user", userRoutes);
 const jobRoutes = require("./routes/jobRoutes");
 app.use("/api/jobs", jobRoutes);
 
+const meRoute = require("./routes/meRoute");
+app.use("/api", meRoute);
+
 // ✅ Connect to MongoDB using Mongoose
 mongoose
   .connect(process.env.MONGO_URI)

@@ -11,7 +11,7 @@ const express = require("express");
 const authMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 
-router.get("/alljobs", authMiddleware, allJobs);
+router.get("/alljobs", allJobs);
 router.post("/postjob", authMiddleware, postjob);
 router.get("/my-posted-jobs", authMiddleware, jobAddByUser);
 router.get("/:id", getJobById);
