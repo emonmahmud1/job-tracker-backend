@@ -29,6 +29,19 @@ const jobSchema = new mongoose.Schema(
       ],
       required: true,
     },
+    industryType: {
+      type: String,
+      enum: ["Govt", "Semi-Govt", "Private", "International", "NGO"],
+      required: true,
+    },
+    requirements: {
+      type: [String], 
+      default: [],
+    },
+    responsibilities: {
+      type: [String],
+      default: [],
+    },
   },
 
   {

@@ -10,6 +10,7 @@ const postjob = async (req, res) => {
       salary,
       deadline,
       category,
+      industryType
     } = req.body;
     const newjob = new Job({
       title,
@@ -19,6 +20,7 @@ const postjob = async (req, res) => {
       salary,
       deadline,
       category,
+      industryType,
       postedBy: req.user.id,
     });
     const savedJob = await newjob.save();
