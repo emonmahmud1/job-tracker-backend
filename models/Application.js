@@ -15,10 +15,6 @@ const applicationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    coverLetter: {
-        type: String,
-        default: '',
-    },
     status: {
         type: String,
         enum: ['applied', 'interviewed', 'offered', 'rejected'],
