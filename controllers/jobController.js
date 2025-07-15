@@ -1,6 +1,7 @@
 const { default: Job } = require("../models/Job");
 
 const postjob = async (req, res) => {
+  console.log(req);
   try {
     const {
       title,
@@ -10,7 +11,9 @@ const postjob = async (req, res) => {
       salary,
       deadline,
       category,
-      industryType
+      requirements,
+      responsibilities,
+      industryType,
     } = req.body;
     const newjob = new Job({
       title,
@@ -21,6 +24,8 @@ const postjob = async (req, res) => {
       deadline,
       category,
       industryType,
+      requirements,
+      responsibilities,
       postedBy: req.user.id,
     });
     const savedJob = await newjob.save();
